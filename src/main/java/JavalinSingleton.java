@@ -21,26 +21,25 @@ public class JavalinSingleton {
          * Note: Please refer to the "RequestBody.MD" file for more assistance.
          */
         app.post("/echo", ctx -> {
-            
+          String songString=ctx.body();
             //implement logic here
-                
+            Song song = om.readValue(songString, Song.class);
+
+        ctx.json(song);
         });
-
-        /**
-         * problem2: retrieve the song object from the request body...
-         *      1. update the artist in the song object to "Beatles"
-         *      2. return the updated song object as JSON in the response body
-         * 
-         * Note: Please refer to the "RequestBody.MD" file for more assistance.
-         */
-        app.post("/changeartisttobeatles", ctx -> {
-
+        return app.post("/changeartisttobeatles", ctx -> {
+            String songString=ctx.body();
+            Song song = om.readValue(songString, Song.class);
+            song.artistName("Beatles");
+            ctx.json(song);
+        
+           
             //implement logic here
                
         });
+    }}
 
 
-        return app;
-    }
-    
-}
+  
+      
+
